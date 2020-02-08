@@ -16,6 +16,8 @@ import java.util.stream.Collectors;
 @Path("/")
 public class IndexResource {
 
+    private static final String DEFAULT_INSTANCE_NAME = "Java Fake Service";
+    private static final String ENV_INSTANCE_NAME = "INSTANCE_NAME";
     private static final String ENV_VAR_SUFFIX = "training_";
 
     @Inject
@@ -26,12 +28,16 @@ public class IndexResource {
     public TemplateInstance get() {
         Map<String, String> environment = System.getenv();
 
+        String applicationName = environment.getOrDefault(ENV_INSTANCE_NAME, DEFAULT_INSTANCE_NAME);
+
         LinkedHashMap<String, String> trainingEnvironment = environment.entrySet().stream()
                 .filter(this::hasSuffix)
                 .sorted(Map.Entry.comparingByKey())
                 .collect(toMapDoNotOverwrite());
 
-        return home.data("env_vars", trainingEnvironment);
+        return home
+                .data("banner_name", applicationName)
+                .data("env_vars", trainingEnvironment);
     }
 
     private boolean hasSuffix(Map.Entry<String, String> v) {

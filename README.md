@@ -18,6 +18,8 @@ This endpoint returns a html page containing application information and will li
 TRAINING_VARIABLE=test java -jar build/java-fake-service-1.0.0-runner.jar
 ```
 
+There is also another environment variable to control what is displayed in the banner at the top of the page. `INSTANCE_NAME` will let you override the default value of `Java Fake Service`.
+
 ## `/hello`
 
 This endpoint will return `Hello <insert name here>` by default. If you want to override the name you can provide an `application.properties` file under `$PWD/config/application.properties` where `$PWD` is the location of the jar file.

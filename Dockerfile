@@ -16,7 +16,7 @@ LABEL git.branch=$git_branch
 LABEL build.on=$built_on
 
 WORKDIR /
-COPY --from=builder /home/gradle/src/build/java-fake-service-1.0.0-SNAPSHOT-runner.jar .
-RUN chmod +x java-fake-service-1.0.0-SNAPSHOT-runner.jar
+COPY --from=builder /home/gradle/src/build/java-fake-service-1.0.0-runner.jar .
+RUN chmod +x java-fake-service-1.0.0-runner.jar
 EXPOSE 8080
-CMD ["java","-jar","java-fake-service-1.0.0-SNAPSHOT-runner.jar"]
+CMD ["java","-jar","java-fake-service-1.0.0-runner.jar"]

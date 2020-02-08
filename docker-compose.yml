@@ -5,6 +5,7 @@ services:
     ports:
       - "8080:8080"
 
+# ENVIRONMENT VARIABLE EXAMPLE
 #version: "3.7"
 #services:
 #  webapp:
@@ -15,6 +16,8 @@ services:
 #      - training_name=123
 #      - training_step=3
 
+
+# VOLUME MOUNTING EXAMPLE
 #version: "3.7"
 #services:
 #  webapp:

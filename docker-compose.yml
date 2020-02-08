@@ -1,6 +1,30 @@
 version: "3.7"
 services:
   webapp:
-    image: quay.io/swade1987/java-fake-service:1.1.4
+    build: .
     ports:
       - "8080:8080"
+
+#version: "3.7"
+#services:
+#  webapp:
+#    build: .
+#    ports:
+#      - "8080:8080"
+#    environment:
+#      - training_name=123
+#      - training_step=3
+
+#version: "3.7"
+#services:
+#  webapp:
+#    build: .
+#    ports:
+#      - "8080:8080"
+#    environment:
+#      - training_name=123
+#      - training_step=3
+#    volumes:
+#      - type: bind
+#        source: ./properties.txt
+#        target: /config/application.properties

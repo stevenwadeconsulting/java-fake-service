@@ -111,6 +111,12 @@
             <li>ArtifactId: java-fake-service</li>
             <li>Version: 1.0.0-SNAPSHOT</li>
         </ul>
+        <h3>Environment Variables</h3>
+        <ul>
+        {#for var in env_vars}
+            <li>{var.key} - {var.value}</li>
+        {/for}
+        </ul>
     </div>
 </div>
 

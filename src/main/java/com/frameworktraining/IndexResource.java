@@ -2,6 +2,9 @@ package com.frameworktraining;
 
 import io.quarkus.qute.Template;
 import io.quarkus.qute.TemplateInstance;
+import org.eclipse.microprofile.metrics.MetricUnits;
+import org.eclipse.microprofile.metrics.annotation.Counted;
+import org.eclipse.microprofile.metrics.annotation.Timed;
 
 import javax.inject.Inject;
 import javax.ws.rs.GET;
@@ -25,6 +28,8 @@ public class IndexResource {
 
     @GET
     @Produces(MediaType.TEXT_HTML)
+    @Counted(name = "count", description = "A counter for how many times the index resource is requested.")
+    @Timed(name = "timer", description = "A measure of how many milliseconds it takes to serve a request on the index resource.", unit = MetricUnits.MILLISECONDS)
     public TemplateInstance get() {
         Map<String, String> environment = System.getenv();
 

@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
         - name: java-fake-service
-          image: quay.io/swade1987/java-fake-service:1.1.9
+          image: quay.io/swade1987/java-fake-service:1.1.11
           imagePullPolicy: IfNotPresent
           env:
             - name: TRAINING_NAME

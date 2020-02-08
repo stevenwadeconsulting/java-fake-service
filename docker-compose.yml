@@ -29,5 +29,5 @@ services:
 #      - training_step=3
 #    volumes:
 #      - type: bind
-#        source: ./properties.txt
+#        source: ./application.properties
 #        target: /config/application.properties

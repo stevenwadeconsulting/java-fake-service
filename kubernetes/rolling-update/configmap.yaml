@@ -1,0 +1,10 @@
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: java-fake-service
+  labels:
+    app_name: java-fake-service
+data:
+  application.properties:
+    greeting.name = Steven Wade

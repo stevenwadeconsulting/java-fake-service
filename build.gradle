@@ -22,7 +22,7 @@ dependencies {
 }
 
 group 'com.frameworktraining'
-version '1.0.0'
+version = project.hasProperty('version') ? project['version'] : '1.0.0'
 
 compileJava {
     options.compilerArgs << '-parameters'

@@ -18,6 +18,7 @@ build:
 	--build-arg git_branch=`git rev-parse --abbrev-ref HEAD` \
 	--build-arg git_commit=`git rev-parse HEAD` \
 	--build-arg built_on=`date -u +"%Y-%m-%dT%H:%M:%SZ"` \
+	--build-arg VERSION=$(VERSION) \
 	-t $(IMAGE) .
 
 login:
@@ -50,3 +51,12 @@ compose-down:
 # ========================================================================================
 # KUBERNETES TASKS
 # ========================================================================================
+
+cluster:
+	kind create cluster --name fake-service
+
+rolling-update:
+	kubectl apply -f kubernetes/rolling-update
+
+port-forward:
+	kubectl port-forward svc/java-fake-service 8080:80

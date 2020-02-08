@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: java-fake-service
+  namespace: default
+  labels:
+    app_name: java-fake-service
+spec:
+  replicas: 3
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  selector:
+    matchLabels:
+      app_name: java-fake-service
+  template:
+    metadata:
+      labels:
+        app_name: java-fake-service
+    spec:
+      containers:
+        - name: java-fake-service
+          image: quay.io/swade1987/java-fake-service:1.1.11
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: TRAINING_NAME
+              value: "testing 123"
+            - name: INSTANCE_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+          ports:
+            - name: http
+              containerPort: 8080
+          livenessProbe:
+            httpGet:
+              path: /health/live
+              port: 8080
+            initialDelaySeconds: 20
+          readinessProbe:
+            httpGet:
+              path: /health/ready
+              port: 8080
+            initialDelaySeconds: 20
+          volumeMounts:
+            - name: application-properties
+              mountPath: /config
+              readOnly: true
+      volumes:
+        - name: application-properties
+          configMap:
+            name: java-fake-service

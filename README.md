@@ -6,7 +6,8 @@ It has two main endpoints:
 | Endpoint | Content Type |
 | --- | --- |
 | `/` | HTML |
-| `/hello` | PLAINTEXT |
+| `/greeting/hello` | PLAINTEXT |
+| `/greeting/names` | PLAINTEXT |
 | `/health/live` | JSON |
 | `/health/ready` | JSON |
 | `/metrics` | PLAINTEXT |
@@ -21,7 +22,7 @@ TRAINING_VARIABLE=test java -jar build/java-fake-service-1.0.0-runner.jar
 
 There is also another environment variable to control what is displayed in the banner at the top of the page. `INSTANCE_NAME` will let you override the default value of `Java Fake Service`.
 
-## `/hello`
+## `/greeting/hello`
 
 This endpoint will return `Hello <insert name here>` by default. If you want to override the name you can provide an `application.properties` file under `$PWD/config/application.properties` where `$PWD` is the location of the jar file.
 
@@ -29,6 +30,14 @@ If you want to override set the following property in the `application.propertie
 
 ```properties
 greeting.name = Another name!
+```
+
+## `/greeting/names`
+
+This endpoint will return a random name from a list of names provided via the `greeting.availableNames` key in `application.properties`. If this is not set it defaults to `World`.
+
+```properties
+greeting.availableNames=Jen,Steve,Will,Tom,Vicky,Dave
 ```
 
 ## `/health/live`

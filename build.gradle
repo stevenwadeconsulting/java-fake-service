@@ -13,13 +13,14 @@ dependencies {
     implementation 'io.quarkus:quarkus-config-yaml'
     implementation enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}")
     implementation 'io.quarkus:quarkus-resteasy'
+    implementation 'io.quarkus:quarkus-resteasy-qute'
 
     testImplementation 'io.quarkus:quarkus-junit5'
     testImplementation 'io.rest-assured:rest-assured'
 }
 
 group 'com.frameworktraining'
-version '1.0.0-SNAPSHOT'
+version '1.0.0'
 
 compileJava {
     options.compilerArgs << '-parameters'

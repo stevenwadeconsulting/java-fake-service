@@ -11,8 +11,10 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
@@ -20,6 +22,7 @@ import java.util.stream.Collectors;
 public class IndexResource {
 
     private static final String DEFAULT_INSTANCE_NAME = "Java Fake Service";
+    private static final String DEFAULT_VERSION = "UNKNOWN";
     private static final String ENV_INSTANCE_NAME = "INSTANCE_NAME";
     private static final String ENV_VAR_SUFFIX = "training_";
 
@@ -31,6 +34,8 @@ public class IndexResource {
     @Counted(name = "count", description = "A counter for how many times the index resource is requested.")
     @Timed(name = "timer", description = "A measure of how many milliseconds it takes to serve a request on the index resource.", unit = MetricUnits.MILLISECONDS)
     public TemplateInstance get() {
+        String applicationVersion = getApplicationVersionFromManifestOrDefault();
+
         Map<String, String> environment = System.getenv();
 
         String applicationName = environment.getOrDefault(ENV_INSTANCE_NAME, DEFAULT_INSTANCE_NAME);
@@ -42,7 +47,12 @@ public class IndexResource {
 
         return home
                 .data("banner_name", applicationName)
+                .data("application_version", applicationVersion)
                 .data("env_vars", trainingEnvironment);
+    }
+
+    private String getApplicationVersionFromManifestOrDefault() {
+        return Optional.ofNullable(getClass().getPackage().getImplementationVersion()).orElse(DEFAULT_VERSION);
     }
 
     private boolean hasSuffix(Map.Entry<String, String> v) {

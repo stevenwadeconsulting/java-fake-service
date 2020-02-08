@@ -4,8 +4,8 @@ plugins {
 }
 
 repositories {
-     mavenLocal()
-     mavenCentral()
+    mavenLocal()
+    mavenCentral()
 }
 
 dependencies {
@@ -26,6 +26,14 @@ version = project.hasProperty('version') ? project['version'] : '1.0.0'
 
 compileJava {
     options.compilerArgs << '-parameters'
+}
+
+jar {
+    manifest {
+        attributes(
+                'Implementation-Version': "${version}"
+        )
+    }
 }
 
 java {

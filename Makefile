@@ -38,16 +38,13 @@ logout:
 run-docker:
 	docker run -p -d 8080:8080 $(IMAGE)
 
-run-compose-build:
-	docker-compose -f docker-compose-build.yml up -d
+compose-build:
+	docker-compose build --no-cache
 
-down-compose-build:
-	docker-compose -f docker-compose-build.yml down
-
-run-compose:
+compose-up:
 	docker-compose up -d
 
-down-compose:
+compose-down:
 	docker-compose down
 
 # ========================================================================================

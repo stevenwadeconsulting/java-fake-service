@@ -50,3 +50,9 @@ compose-down:
 # ========================================================================================
 # KUBERNETES TASKS
 # ========================================================================================
+
+cluster:
+	kind create cluster --name fake-service
+
+rolling-update:
+	kubectl apply -f kubernetes/rolling-update

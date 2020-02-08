@@ -41,8 +41,14 @@ run-docker:
 run-compose-build:
 	docker-compose -f docker-compose-build.yml up -d
 
+down-compose-build:
+	docker-compose -f docker-compose-build.yml down
+
 run-compose:
 	docker-compose up -d
+
+down-compose:
+	docker-compose down
 
 # ========================================================================================
 # KUBERNETES TASKS

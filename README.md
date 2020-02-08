@@ -9,6 +9,7 @@ It has two main endpoints:
 | `/hello` | PLAINTEXT |
 | `/health/live` | JSON |
 | `/health/ready` | JSON |
+| `/metrics` | PLAINTEXT |
 
 ## `/`
 
@@ -49,3 +50,7 @@ readiness.healthy = true
 ```
 
 When failing it will return a `503` status code.
+
+## `/metrics`
+
+This is an endpoint to expose metrics in a plaintext format. The two exposed resources have both a `count` and a `timer` metrics to provide request latency metrics.
